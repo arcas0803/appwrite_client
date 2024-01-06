@@ -1,0 +1,10 @@
+{
+    "@@locale": "es",
+    "notFound": "No se encontraron resultados para la solicitud realizada",
+    "unauthorized": "No tiene permisos para acceder a este recurso. Si el problema persiste, por favor contacte al administrador del sistema",
+    "forbidden": "No tiene permisos para acceder a este recurso. Si el problema persiste, por favor contacte al administrador del sistema",
+    "fromJsonFailed": "Error al deserializar JSON",
+    "toJsonFailed": "Error al serializar JSON",
+    "serverFailure": "Se ha producido un error en el servidor. Si el problema persiste, por favor contacte al administrador del sistema"
+    
+}
