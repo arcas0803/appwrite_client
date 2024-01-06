@@ -89,6 +89,18 @@ abstract class AppwriteClient<T> {
   ///
   Future<Result<void>> delete({required String documentId});
 
+  /// Delete documents
+  ///
+  /// [documentIds] is a list of document ids to delete
+  ///
+  /// Returns a [Result] with void
+  ///
+  /// Throws an [UnauthorizedFailure] if the user is not authorized
+  ///
+  /// Throws an [ForbiddenFailure] if the user is not authorized
+  ///
+  Future<Result<void>> deleteMany({required List<String> documentIds});
+
   /// List documents
   ///
   /// [queries] is a list of queries to filter the documents

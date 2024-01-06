@@ -580,4 +580,66 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
       return Result.error(failure);
     }
   }
+
+  @override
+  Future<Result<void>> deleteMany({required List<String> documentIds}) async {
+    _logger?.d('[START] Deleting documents: $documentIds');
+
+    final connectivityResult =
+        await _connectivityClient.checkInternetConnection();
+
+    if (connectivityResult.isError) {
+      return Result.error(
+        NoInternetConnectionFailure(),
+      );
+    }
+
+    try {
+      await Future.wait(
+        [
+          for (var documentId in documentIds)
+            _db.deleteDocument(
+                databaseId: _databaseId,
+                collectionId: _collectionId,
+                documentId: documentId)
+        ],
+        eagerError: true,
+      );
+
+      _logger?.d('[SUCCESS] Deleted documents: ${documentIds.toString()}');
+
+      _telemetryOnSuccess?.call();
+
+      return Result.success(null);
+    } on AppwriteException catch (e, s) {
+      final failure = _onAppwriteException(e, s);
+
+      Logger().e(
+        '[ERROR] Error while deleting documents: $documentIds',
+        time: DateTime.now(),
+        error: e,
+        stackTrace: s,
+      );
+
+      _telemetryOnError?.call(failure);
+
+      return Result.error(failure);
+    } catch (e, s) {
+      final failure = ServerFailure(
+        error: e.toString(),
+        stackTrace: s,
+      );
+
+      Logger().e(
+        '[ERROR] Error while deleting documents: $documentIds',
+        time: DateTime.now(),
+        error: e,
+        stackTrace: s,
+      );
+
+      _telemetryOnError?.call(failure);
+
+      return Result.error(failure);
+    }
+  }
 }
