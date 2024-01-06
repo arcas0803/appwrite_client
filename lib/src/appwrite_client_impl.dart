@@ -27,7 +27,7 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
 
   final T Function(Map<String, dynamic> json) _fromJson;
 
-  final Map<String, String> Function(T document) _toJson;
+  final Map<String, dynamic> Function(T document) _toJson;
 
   final ConnectivityClient _connectivityClient;
 
@@ -36,7 +36,7 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
     required String databaseId,
     required String collectionId,
     required T Function(Map<String, dynamic> json) fromJson,
-    required Map<String, String> Function(T document) toJson,
+    required Map<String, dynamic> Function(T document) toJson,
     Logger? logger,
     FutureOr<void> Function(Failure)? telemetryOnError,
     FutureOr<void> Function()? telemetryOnSuccess,
