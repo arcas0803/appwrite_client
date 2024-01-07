@@ -493,7 +493,7 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
   }
 
   @override
-  Future<Result<void>> paginatedList(
+  Future<Result<List<T>>> paginatedList(
       {required int offset, required int limit, List<String>? queries}) async {
     _logger?.d('[START] Paginated listing documents');
 

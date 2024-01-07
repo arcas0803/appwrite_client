@@ -133,6 +133,6 @@ abstract class AppwriteClient<T> {
   ///
   /// Throws an [FromJsonFailure] if parsing the json fails
   ///
-  Future<Result<void>> paginatedList(
+  Future<Result<List<T>>> paginatedList(
       {required int offset, required int limit, List<String>? queries});
 }
