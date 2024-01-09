@@ -122,6 +122,12 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
 
   Failure _onAppwriteException(e, s) {
     if (e.code != null) {
+      _logger?.e(
+        '[ERROR] AppWrite error code: ${e.code}',
+        time: DateTime.now(),
+        error: e,
+        stackTrace: s,
+      );
       switch (e.code) {
         case 401:
           return UnauthorizedFailure(
