@@ -353,7 +353,13 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
   Future<Result<List<T>>> list({
     List<String>? queries,
   }) async {
-    _logger?.d('[START] Listing documents');
+    _logger?.d('''
+        [START] Listing documents 
+        with queries: $queries
+        databaseId: $_databaseId
+        collectionId: $_collectionId
+
+      ''');
 
     final connectivityResult =
         await _connectivityClient.checkInternetConnection();
