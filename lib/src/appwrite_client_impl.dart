@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite_client/src/appwrite_client.dart';
@@ -400,7 +401,7 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
     } on AppwriteException catch (e, s) {
       final failure = _onAppwriteException(e, s);
 
-      debugPrint('AppwriteException: ${e.toString()}');
+      log('AppWriteException: ${e.toString()}');
 
       Logger().e(
         '[ERROR] AppwriteError while listing documents',
@@ -418,7 +419,7 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
         stackTrace: s,
       );
 
-      debugPrint('AppwriteException: ${e.toString()}');
+      log('Exception: ${e.toString()}');
 
       Logger().e(
         '[ERROR] Error while listing documents',
