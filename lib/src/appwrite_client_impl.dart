@@ -400,8 +400,10 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
     } on AppwriteException catch (e, s) {
       final failure = _onAppwriteException(e, s);
 
+      debugPrint('AppwriteException: ${e.toString()}');
+
       Logger().e(
-        '[ERROR] Error while listing documents',
+        '[ERROR] AppwriteError while listing documents',
         time: DateTime.now(),
         error: e,
         stackTrace: s,
@@ -415,6 +417,8 @@ class AppwriteClientImpl<T> implements AppwriteClient<T> {
         error: e.toString(),
         stackTrace: s,
       );
+
+      debugPrint('AppwriteException: ${e.toString()}');
 
       Logger().e(
         '[ERROR] Error while listing documents',
